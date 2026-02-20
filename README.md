@@ -1,166 +1,70 @@
-# NotaBene 📚
+# NOTABENE 📚
 
-> *Nota bene* (latin) : "note bien", "remarque importante"
+```text
+███╗   ██╗ ██████╗ ████████╗ █████╗ ██████╗ ███████╗███╗   ██╗███████╗
+████╗  ██║██╔═══██╗╚══██╔══╝██╔══██╗██╔══██╗██╔════╝████╗  ██║██╔════╝
+██╔██╗ ██║██║   ██║   ██║   ███████║██████╔╝█████╗  ██╔██╗ ██║█████╗  
+██║╚██╗██║██║   ██║   ██║   ██╔══██║██╔══██╗██╔══╝  ██║╚██╗██║██╔══╝  
+██║ ╚████║╚██████╔╝   ██║   ██║  ██║██████╔╝███████╗██║ ╚████║███████╗
+╚═╝  ╚═══╝ ╚═════╝    ╚═╝   ╚═╝  ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝
+                                                                    
+══════════════════════════════════════════════════════════════════════
+ Research Knowledge Base                    by  The Performer  ◆
+══════════════════════════════════════════════════════════════════════
+```
 
-**NotaBene** est un outil d'aide à la recherche scientifique conçu pour centraliser, organiser et exploiter efficacement vos sources académiques et web lors de la rédaction de mémoires, thèses ou articles scientifiques.
+**NotaBene** est un outil CLI puissant et élégant conçu pour centraliser, organiser et exploiter vos sources académiques et web.
 
-## 🎯 Objectif
+## ✨ Points Forts
 
-Faciliter le travail de recherche en offrant un système unifié pour :
-- Gérer vos articles scientifiques (PDF) avec extraction automatique des métadonnées
-- Organiser vos sources web avec traçabilité complète
-- Prendre des notes structurées liées à vos sources
-- Rechercher rapidement dans votre base de connaissances
-- Exporter vos références vers BibTeX ou Markdown
-
-## ✨ Fonctionnalités (MVP)
-
-### 📄 Gestion des PDF
-- Import de fichiers PDF
-- Extraction automatique : titre, auteurs, résumé
-- Stockage local des fichiers et métadonnées
-- Notes personnelles par article
-
-### 🌐 Gestion des sources web
-- Enregistrement d'URLs avec extraction automatique des métadonnées
-- Conservation du lien original pour citation
-- Tags et notes personnelles
-- Traçabilité complète
-
-### 🏷️ Organisation
-- Système de tags flexible
-- Regroupement par thèmes/chapitres
-- Liens entre sources et concepts
-- Recherche multi-critères (mots-clés, tags, auteurs)
-
-### 📝 Prise de notes
-- Notes libres par source
-- Marquage d'idées clés, arguments, questions
-- Lien permanent entre idée et source
-
-### 📤 Export
-- Export BibTeX pour LaTeX
-- Export Markdown pour documentation
-- Génération de listes de sources par chapitre
+- **Minimalisme & Performance** : Une interface CLI conçue pour la rapidité et le focus.
+- **Automatisation** : Extraction intelligente des métadonnées (titre, auteurs, résumé) pour les PDFs et les pages Web.
+- **Organisation Flexible** : Système de tags et de notes structurées (Idées, Arguments, Questions).
+- **Prêt pour la Rédaction** : Exportation directe vers BibTeX et Markdown.
+- **Confidentialité** : Tout est stocké localement sur votre machine.
 
 ## 🚀 Installation
 
-### Prérequis
-- Python 3.9 ou supérieur
-- pip ou uv
-
-### Installation en mode développement
-
 ```bash
-# Cloner le repository
 git clone https://github.com/ThePerformer0/notabene.git
 cd notabene
-
-# Créer un environnement virtuel
 python -m venv venv
-source venv/bin/activate  # Sur Windows: venv\Scripts\activate
-
-# Installer les dépendances
+# Activer le venv (Windows: venv\Scripts\activate)
 pip install -e .
-
-# Installer les dépendances de développement
-pip install -e ".[dev]"
 ```
 
-## 📖 Utilisation
-
-NotaBene s'utilise via une interface en ligne de commande (CLI) avec deux alias disponibles : `notab` ou `nb`.
-
-### Commandes principales
+## 📖 Utilisation Rapide
 
 ```bash
-# Initialiser un nouveau projet de recherche
+# Initialiser votre base
 notab init
 
-# Ajouter un PDF
-notab add pdf /chemin/vers/article.pdf
+# Ajouter un article scientifique
+notab add pdf journal_article.pdf
 
 # Ajouter une source web
-notab add web https://example.com/article
+notab add web https://arxiv.org/abs/2301.00000
 
-# Rechercher dans vos sources
-notab search "machine learning"
+# Rechercher et voir les détails
+notab search "Transformer"
+notab show 1
 
-# Lister toutes les sources
-notab list
-
-# Ajouter une note à une source
-notab note add <source-id> "Votre note ici"
-
-# Exporter en BibTeX
-notab export bibtex --output references.bib
-
-# Afficher l'aide
-notab --help
+# Exporter vos notes
+notab export markdown --output memoire_notes.md
 ```
-
-## 🏗️ Architecture
-
-```
-notabene/
-├── cli/              # Interface en ligne de commande (Click)
-├── core/             # Logique métier centrale
-├── managers/         # Gestionnaires de domaine
-│   ├── document_manager.py      # Gestion des PDF
-│   ├── web_source_manager.py    # Gestion des sources web
-│   ├── note_manager.py          # Gestion des notes
-│   ├── knowledge_organizer.py   # Tags, liens, thèmes
-│   └── search_engine.py         # Recherche et filtrage
-├── models/           # Modèles de données (SQLAlchemy)
-├── utils/            # Utilitaires (extraction, parsing)
-└── data/             # Stockage local (SQLite, PDFs)
-```
-
-## 🛠️ Technologies
-
-- **Langage** : Python 3.9+
-- **CLI** : Click
-- **Base de données** : SQLite + SQLAlchemy
-- **Extraction PDF** : pdfplumber
-- **Web scraping** : BeautifulSoup4 + requests
-- **Interface** : Rich (affichage terminal)
-- **Tests** : pytest
-- **Qualité du code** : black, flake8, mypy
-
-## 📋 Statut du projet
-
-**Version actuelle** : 0.1.0 (MVP en développement)
-
-## 🧪 Tests
-
-```bash
-# Lancer tous les tests
-pytest
-
-# Avec couverture
-pytest --cov=notabene --cov-report=html
-
-# Tests spécifiques
-pytest tests/unit/
-pytest tests/integration/
-```
-
-## 🤝 Contribution
-
-Ce projet est actuellement en développement actif pour un usage personnel (rédaction de mémoire). Les contributions seront bienvenues une fois le MVP stabilisé.
-
-### Standards de code
-- Formatage : Black (88 caractères)
-- Linting : flake8
-- Type hints : mypy
-- Tests : pytest avec couverture > 80%
 
 ## 📚 Documentation
 
-- [Guide utilisateur](docs/user_guide/) (à venir)
-- [Documentation API](docs/api/) (à venir)
-- [Cahier des charges MVP](MVP.md)
+- [Guide d'utilisation Complet](docs/user_guide/usage.md)
+- [Architecture Technique](docs/api/architecture.md)
+- [Changelog](CHANGELOG.md)
+
+## 🛠️ Technologies
+
+- **Python 3.12+**
+- **Click** & **Rich** (Interface CLI)
+- **SQLAlchemy** & **SQLite** (Base de données)
+- **pdfplumber** (Extraction PDF de haute précision)
 
 ---
-
-**Note** : Ce projet est en développement actif. L'API et les fonctionnalités peuvent évoluer rapidement.
+*Développé par [The Performer](https://github.com/ThePerformer0)*
